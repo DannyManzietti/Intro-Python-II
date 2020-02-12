@@ -1,4 +1,5 @@
 from room import Room
+from player import Player
 
 # Declare all the rooms
 
@@ -39,10 +40,6 @@ room['treasure'].s_to = room['narrow']
 
 # Make a new player object that is currently in the 'outside' room.
 
-player_name = str(input("Please name your character: "))
-player = Player(player_name, room['outside'])
-print(player.current_room)
-directions = ["N", "S", "E", "W"]
 
 # Write a loop that:
 #
@@ -54,3 +51,39 @@ directions = ["N", "S", "E", "W"]
 # Print an error message if the movement isn't allowed.
 #
 # If the user enters "q", quit the game.
+
+def main():
+    player = Player(input("Please enter your name: "), room['outside'])
+
+    while True:
+        print(f"Current Location: {player.current_room.name}")
+        print(player.current_room.description)
+        user_input = input(">>")
+        if user_input == 'n':
+            if player.current_room.n_to != None:
+                player.change_room(player.current_room.n_to)
+            else:
+                print("You can't move in that direction")
+        elif user_input == 's':
+            if player.current_room.s_to != None:
+                player.change_room(player.current_room.s_to)
+            else:
+                print("You can't move in that direction")
+        elif user_input == 'e':
+            if player.current_room.e_to != None:
+                player.change_room(player.current_room.e_to)
+            else:
+                print("You can't move in that direction")
+        elif user_input == 'w':
+            if player.current_room.w_to != None:
+                player.change_room(player.current_room.w_to)
+            else:
+                print("You can't move in that direction")
+        elif user_input == 'q':
+            break
+        else:
+            print("Input not valid, please try again!")
+
+
+if __name__ == "__main__":
+    main()
