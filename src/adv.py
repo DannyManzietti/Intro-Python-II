@@ -57,28 +57,24 @@ def main():
     player = Player(input("Enter your name: "), room['outside'])
 
     while True:
-        # print the current room name
+
         print(f"Current location: {player.current_room.name}")
-        # print current room description
+
         print(player.current_room.description)
 
-        # wait for user input
         user_input = input(">> ")
 
         directions = ('n', 's', 'e', 'w')
-        # if user enters a cardinal direction, attempt to move there
         if user_input in directions:
             attempted_room = getattr(player.current_room, f"{user_input}_to")
-            # if movement is allowed, update the current room
             if attempted_room != None:
                 player.change_room(attempted_room)
-            # print error message if movement is not allowed
             else:
                 print("Movement in that direction invalid")
-        # else if user enters q, quit the game
+
         elif user_input == 'q':
             break
-        # print error message if user enters invalid input
+
         else:
             print("Input not valid, please try again")
 
